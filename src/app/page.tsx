@@ -1,5 +1,9 @@
+import { headers } from "next/headers";
 import Link from "next/link";
 import { db } from "~/server/db";
+
+//-- to make the page dynamic and for the page to immediately recognise db changes
+export const dynamic = "force-dynamic"
 
 const mockUrls = [
     "https://images.unsplash.com/photo-1502301197179-65228ab57f78?w=1400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dmFjYXRpb258ZW58MHx8MHx8fDA%3D",
