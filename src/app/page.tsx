@@ -1,7 +1,9 @@
+
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { db } from "~/server/db";
+import { UploadButton } from "~/utils/uploadthing";
 
 //-- to make the page dynamic and for the page to immediately recognise db changes
 export const dynamic = "force-dynamic"
@@ -14,8 +16,8 @@ async function Images (){
   })
 
   return(
-    images.map((image, index)=>(
-      <div key={image.id + "-" + index} className="w-48 p-4">
+    images.map((image)=>(
+      <div key={image.id } className="w-48 p-4">
         <img src={image.url} />
       </div>
     ))
