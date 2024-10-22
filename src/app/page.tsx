@@ -3,6 +3,7 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { db } from "~/server/db";
+import { getMyImages } from "~/server/queries";
 import { UploadButton } from "~/utils/uploadthing";
 
 //-- to make the page dynamic and for the page to immediately recognise db changes
@@ -11,9 +12,7 @@ export const dynamic = "force-dynamic"
 
 async function Images (){
 
-  const images = await db.query.images.findMany({
-    orderBy: (model, {desc}) => desc(model.id)
-  })
+  const images = await getMyImages()
 
   return(
     images.map((image)=>(
