@@ -1,40 +1,45 @@
-
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { headers } from "next/headers";
-import Link from "next/link";
-import { db } from "~/server/db";
+import Image from "next/image";
 import { getMyImages } from "~/server/queries";
-import { UploadButton } from "~/utils/uploadthing";
 
 //-- to make the page dynamic and for the page to immediately recognise db changes
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
+async function Images() {
+  const images = await getMyImages();
 
-async function Images (){
-
-  const images = await getMyImages()
-
-  return(
-    images.map((image)=>(
-      <div key={image.id } className="w-48 p-4">
-        <img src={image.url} />
-      </div>
-    ))
-  )
+  return (
+    <div className=" flex flex-wrap justify-center gap-4">
+      {images.map((image) => (
+        <div
+          key={image.id}
+          className="flex h-48 w-48 flex-col"
+        >
+          <Image
+            src={image.url}
+            alt={image.name}
+            style={{ objectFit: "contain" }}
+            width={192}
+            height={192}
+          />
+          <div className="">{image.name}</div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-
 export default async function HomePage() {
-  
   return (
     <main className="flex flex-wrap gap-4">
-     <SignedOut>
-      <div className="h-full w-full text2xl text-center">Please sign in above</div>
-     </SignedOut>
-     <SignedIn>
-       <Images/>
-     </SignedIn>
+      <SignedOut>
+        <div className="text2xl h-full w-full text-center">
+          Please sign in above
+        </div>
+      </SignedOut>
+      <SignedIn>
+        <Images />
+      </SignedIn>
     </main>
   );
 }
- 
