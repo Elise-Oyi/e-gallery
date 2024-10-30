@@ -20,6 +20,7 @@ export async function getMyImages() {
 
 export async function getImage(id:number){
   const user = auth()
+  // console.log(user,"user")
 
   if(!user) throw new Error("Unauthorized")
 
