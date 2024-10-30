@@ -12,8 +12,8 @@ import { ourFileRouter } from "./api/uploadthing/core";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans"
-})
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "E Gallery",
@@ -24,10 +24,10 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   modal,
-}: { 
-    children: React.ReactNode;
-    modal: React.ReactNode 
-  }) {
+}: {
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}) {
   return (
     <ClerkProvider>
       <html lang="en">
@@ -40,9 +40,11 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-        <body className={`flex flex-col gap-4 ${inter.variable}`}>
-          <TopNav />
-          {children}
+        <body className={`font-sans ${inter.variable}`}>
+          <div className="grid h-screen grid-rows-[auto,1fr]">
+            <TopNav />
+            <main className="overflow-y-scroll">{children}</main>
+          </div>
           {modal}
           <div id="modal-root" />
         </body>
