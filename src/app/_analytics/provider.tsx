@@ -17,7 +17,7 @@ export function CSPostHogProvider({ children }: { children: React.ReactNode }) {
       <PostHogAuthWrapper>{children}</PostHogAuthWrapper>
     </PostHogProvider>
   );
-}
+} 
 
 function PostHogAuthWrapper({ children }: { children: React.ReactNode }) {
   const auth = useAuth();
